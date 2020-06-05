@@ -1,7 +1,9 @@
 /** @format */
 
 import { Router } from 'express';
-import userController from '../controller/userController';
+import { register, login, create } from '../controller/userController';
+import { registerRules, validate } from '../validator/userValidation';
+
 const router = Router();
 
 /*
@@ -9,13 +11,20 @@ const router = Router();
    Login form of User
    Public Route
 */
-router.get('/login', userController.login);
+router.get('/login', login);
 
 /*
    Route : /users/register   GET
    Register Form of user
    Public Route
 */
-router.get('/register', userController.register);
+router.get('/register', register);
+
+/*
+   Route : /users/register   POST
+   Register Form of user
+   Public Route
+*/
+router.post('/register', registerRules(), validate, create);
 
 export default router;
