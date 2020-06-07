@@ -2,7 +2,6 @@
 
 import { Router } from 'express';
 import { register, login, create } from '../controller/userController';
-import { registerRules, validate } from '../validator/userValidation';
 
 const router = Router();
 
@@ -22,9 +21,9 @@ router.get('/register', register);
 
 /*
    Route : /users/register   POST
-   Register Form of user
+   Register Handel
    Public Route
 */
-router.post('/register', registerRules(), validate, create);
+router.post('/register', create);
 
 export default router;
