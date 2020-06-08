@@ -4,10 +4,14 @@ import express from 'express';
 import expressEjsLayouts from 'express-ejs-layouts';
 import session from 'express-session';
 import flash from 'connect-flash';
+import passport from 'passport';
 
 import indexRoute from './routers/index';
 import userRoute from './routers/user';
 import dbController from './db/dbController';
+import passportAuth from './controller/passport';
+
+passportAuth(passport);
 //Middleware
 const app = express();
 
@@ -27,6 +31,10 @@ app.use(
 		saveUninitialized: true,
 	}),
 );
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Connect Flash
 app.use(flash());
